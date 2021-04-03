@@ -1,0 +1,36 @@
+# VERSION=latest
+# ENV=dev
+# ENABLE_BUILD=false
+
+version: "3.6"
+
+services:
+
+  dbconsultant:
+    image: postgres:13.1
+    container_name: dbconsultant
+    hostname: docker_dbconsultant
+    networks:
+      internal-subnet:
+        ipv4_address: 172.28.5.10
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=consultant
+      - POSTGRES_USER=consultant
+      - POSTGRES_PASSWORD=Pa55w0rd
+    volumes:
+      - dbconsultant_data:/var/lib/postgresql/data
+    restart: always
+
+networks:
+  internal-subnet:
+    name: internal_subnet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.5.0/24
+
+volumes:  
+  dbconsultant_data:

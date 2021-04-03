@@ -1,2 +1,0 @@
-# tricefal-consultant-backend
-
