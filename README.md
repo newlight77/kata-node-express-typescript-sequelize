@@ -17,4 +17,7 @@ npm i cors
 npm i -D @types/cors
 
 npm i -D nodemon
+
+npm install -D @types/pg
+
 ```
