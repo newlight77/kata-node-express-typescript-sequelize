@@ -4,6 +4,14 @@ import pool from "../config/db.connector";
 
 class TodosController {
 
+    public async hello(req: Request, res: Response) {
+        try {
+            res.send("hello");
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    }
+
     public async get(req: Request, res: Response) {
         try {
             const client = await pool.connect();

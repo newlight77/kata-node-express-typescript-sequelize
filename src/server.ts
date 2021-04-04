@@ -2,10 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-const API_URL = process.env.API_URL || "http://localhost:3000";
-
-import todosRouter from './routes/todo.router';
+import routes from './routes/routes';
 import pool from './config/db.connector';
+import sequelize from './config/db.config';
+
+const API_URL = process.env.API_URL || "http://localhost:3000";
 
 const corsOptions: cors.CorsOptions = {
     allowedHeaders: [
@@ -47,7 +48,7 @@ class Server {
     }
 
     private routerConfig() {
-        this.app.use('/todos', todosRouter);
+        this.app.use('/api', routes);
     }
 
     public start = (port: number) => {

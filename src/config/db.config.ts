@@ -1,5 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
-import { Dialect } from 'sequelize/types';
+import SignupEntity from '../entities/signup.entity';
 
 const host = process.env.DB_ADDRESS || 'localhost';
 const port = parseInt(process.env.DB_PORT || '5432');
@@ -16,6 +16,7 @@ const options: SequelizeOptions = {
     username,
     password,
     // storage: ':memory:',
+    repositoryMode: true,
     pool: {
         max: 5,
         min: 0,
@@ -23,12 +24,17 @@ const options: SequelizeOptions = {
         idle: 10000
     },
     // only matched filename prefix == model classname
-    modelMatch: (filename, member) => {
-        return (filename.substring(0, filename.indexOf('.entity')) + 'entity') === member.toLowerCase();
-    },
-    models: [__dirname + '/**/*.entity.ts'] // or [Player, Team],
+    // modelMatch: (filename, member) => {
+    //     return (filename.substring(0, filename.indexOf('.entity')) + 'entity') === member.toLowerCase();
+    // },
+    // models: [__dirname + '/../**/*.entity.ts'] // or [Player, Team],
 }
 
+console.info("sequelized configured!", __dirname + '/../**/*.entity.ts');
+
 const sequelize = new Sequelize(options)
+
+sequelize.addModels([SignupEntity]);
+
 
 export default sequelize;
