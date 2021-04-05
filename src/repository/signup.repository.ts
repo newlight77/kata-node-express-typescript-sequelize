@@ -3,18 +3,15 @@ import { map } from 'rxjs/operators'
 
 import SignupEntity, { fromEntity, toEntity } from "../entities/signup.entity";
 import SignupModel from "../models/signup.model";
-import sequelize from '../config/db.config';
 
 
 class SignupRepository {
 
-    private sequelizeRepository = sequelize.getRepository(SignupEntity);
-
     public create(model: SignupModel) {
         try {
-            // const signup = toEntity(model);
-            // signup.save();
-            this.sequelizeRepository.create(model);
+            const signup = toEntity(model);
+            console.info(signup);
+            signup.save();
         } catch (error) {
             console.error("an error occured while saving a signup", error);
         }

@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import routes from './routes/routes';
 import pool from './config/db.connector';
-import sequelize from './config/db.config';
+import dbConfig from './config/db.config';
 
 const API_URL = process.env.API_URL || "http://localhost:3000";
 
@@ -31,6 +31,7 @@ class Server {
         this.config();
         this.routerConfig();
         this.dbConnect();
+        dbConfig.connect();
     }
 
     private config() {

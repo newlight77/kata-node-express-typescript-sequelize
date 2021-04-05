@@ -19,5 +19,10 @@ npm i -D @types/cors
 npm i -D nodemon
 
 npm install -D @types/pg
+npm i sequelize sequelize-typescript reflect-metadata
+npm i -D @types/validator
+
+npm i rxjs
+npm i -D @types/rx
 
 ```

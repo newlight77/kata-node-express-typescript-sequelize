@@ -3,32 +3,28 @@ import SignupModel from '../models/signup.model';
 import { SignupModelBuilder } from '../models/signup.model';
 
 @Table({
+    tableName: "signup",
     timestamps: true
 })
 class SignupEntity extends Model {
 
-    @IsUUID(4)
-    @PrimaryKey
-    @Column
-    id: string = '';
-    
     @Index
     @Column
-    username: string = '';
+    username?: string;
 
     @Column
-    firstname: string = '';
+    firstname?: string;
 
     @Column
-    lastname: string = '';
+    lastname?: string;
 
     @Column
-    phoneNumber: string = '';
+    phoneNumber?: string;
 
-    public getUsername(): string {return this.username;}
-    public getFirstname(): string {return this.firstname;}
-    public getLastname(): string {return this.lastname;}
-    public getPhoneNumber(): string {return this.phoneNumber;}
+    public getUsername(): string {return this.username!;}
+    public getFirstname(): string {return this.firstname!;}
+    public getLastname(): string {return this.lastname!;}
+    public getPhoneNumber(): string {return this.phoneNumber!;}
 }
 
 export function fromEntity(entity: SignupEntity): SignupModel {
@@ -40,7 +36,7 @@ export function fromEntity(entity: SignupEntity): SignupModel {
 }
 
 export function toEntity(model: SignupModel): SignupEntity {
-    return new SignupEntity({ 
+    return SignupEntity.build({ 
         username: model.username,
         firstname: model.firstname,
         lastname: model.lastname,
